@@ -86,6 +86,11 @@ footer {
       text-decoration: none;
       opacity: 0.8;
       transition: opacity 0.2s ease;
+      min-height: 44px;
+      min-width: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       
       &:hover {
         opacity: 1;
@@ -306,6 +311,7 @@ footer {
   .category-btn {
     padding: 0.5rem 1rem;
     border: 1px solid var(--border);
+    min-height: 44px;
     border-radius: 20px;
     background: white;
     cursor: pointer;
