@@ -1,6 +1,17 @@
-import "regenerator-runtime"; /* for async await transpile */
-import "../styles/main.css";
-import "./components/restaurant-categories";
-import "./components";
-import "../styles/_index.scss";
+import 'regenerator-runtime';
+import '../styles/main.css';
+import '../styles/_index.scss';
+import './components';
+import App from './views/app';
 
+const app = new App({
+  content: document.querySelector('#main-section'),
+});
+
+window.addEventListener('hashchange', () => {
+  app.renderPage();
+});
+
+window.addEventListener('load', () => {
+  app.renderPage();
+});
