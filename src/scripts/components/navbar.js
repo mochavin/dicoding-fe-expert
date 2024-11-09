@@ -14,7 +14,7 @@ class NavBar extends HTMLElement {
         
         <ul id="drawer" class="navbar-menu">
           <li><a href="/">Home</a></li>
-          <li><a href="#">Favorite</a></li>
+          <li><a href="#/favorite">Favorite</a></li>
           <li><a href="https://moch-avin.netlify.app/" target="_blank">About Us</a></li>
         </ul>
       </nav>
