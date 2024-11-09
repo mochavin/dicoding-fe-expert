@@ -13,6 +13,48 @@ class RestaurantDetail extends HTMLElement {
     this.renderLoading();
   }
 
+  async handleReviewSubmit() {
+    const nameInput = this.querySelector('#reviewName');
+    const reviewInput = this.querySelector('#reviewText');
+
+    const reviewData = {
+      id: this.restaurant.id,
+      name: nameInput.value,
+      review: reviewInput.value,
+    };
+
+    try {
+      const response = await RestaurantApiSource.addReview(reviewData);
+      if (!response.error) {
+        this.restaurant.customerReviews = response.customerReviews;
+        this.updateReviews();
+
+        // Reset form
+        nameInput.value = '';
+        reviewInput.value = '';
+      }
+    } catch (error) {
+      console.error('Error submitting review:', error);
+    }
+  }
+
+  updateReviews() {
+    const reviewsList = this.querySelector('#reviewsList');
+    reviewsList.innerHTML = this.restaurant.customerReviews
+      .map(
+        (review) => `
+        <div class="review-card">
+          <div class="review-header">
+            <strong>${review.name}</strong>
+            <span>${review.date}</span>
+          </div>
+          <p>${review.review}</p>
+        </div>
+      `
+      )
+      .join('');
+  }
+
   async loadDetail(id) {
     try {
       this.renderLoading();
@@ -166,6 +208,17 @@ class RestaurantDetail extends HTMLElement {
 
         <div class="restaurant-reviews">
           <h2>Customer Reviews</h2>
+           <form id="reviewForm" class="review-form">
+          <div class="form-group">
+            <input type="text" id="reviewName" placeholder="Your Name" required>
+          </div>
+          <div class="form-group">
+            <textarea id="reviewText" placeholder="Write your review..." required></textarea>
+          </div>
+          <button type="submit">Submit Review</button>
+        </form>
+
+        <div id="reviewsList">
           ${this.restaurant.customerReviews
     .map(
       (review) => `
@@ -180,6 +233,7 @@ class RestaurantDetail extends HTMLElement {
     )
     .join('')}
         </div>
+        </div>
         <div class="favorite-container">
           <button id="favoriteButton" class="favorite-button">
             <i class="far fa-heart" aria-hidden="true"></i>
@@ -188,6 +242,11 @@ class RestaurantDetail extends HTMLElement {
         </div>
       </div>
     `;
+
+    this.querySelector('#reviewForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      await this.handleReviewSubmit();
+    });
   }
 }
 
