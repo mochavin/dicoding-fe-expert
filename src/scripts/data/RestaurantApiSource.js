@@ -1,9 +1,9 @@
-import API_ENDPOINT from '../globals/api-endpoint'
+import API_ENDPOINT from '../globals/api-endpoint';
 
 class RestaurantApiSource {
   static async getAllRestaurants() {
     try {
-      const response = await fetch(API_ENDPOINT.resturant_list);
+      const response = await fetch(API_ENDPOINT.resturantList);
       const responseJson = await response.json();
       return responseJson.restaurants;
     } catch (error) {
@@ -13,7 +13,7 @@ class RestaurantApiSource {
 
   static async getRestaurantDetail(id) {
     try {
-      const response = await fetch(API_ENDPOINT.restaurant_detail + id);
+      const response = await fetch(API_ENDPOINT.restaurantDetail + id);
       const responseJson = await response.json();
       return responseJson.restaurant;
     } catch (error) {
@@ -23,7 +23,7 @@ class RestaurantApiSource {
 
   static async addReview(review) {
     try {
-      const response = await fetch(API_ENDPOINT.add_comment, {
+      const response = await fetch(API_ENDPOINT.addComment, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

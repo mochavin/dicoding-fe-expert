@@ -22,20 +22,20 @@ class NavBar extends HTMLElement {
   }
 
   afterRender() {
-    const hamburger = this.querySelector("#hamburger");
-    const drawer = this.querySelector("#drawer");
+    const hamburger = this.querySelector('#hamburger');
+    const drawer = this.querySelector('#drawer');
 
-    hamburger.addEventListener("click", (event) => {
-      drawer.classList.toggle("open");
+    hamburger.addEventListener('click', (event) => {
+      drawer.classList.toggle('open');
       event.stopPropagation();
     });
 
-    document.addEventListener("click", (event) => {
+    document.addEventListener('click', (event) => {
       if (!drawer.contains(event.target) && !hamburger.contains(event.target)) {
-        drawer.classList.remove("open");
+        drawer.classList.remove('open');
       }
     });
   }
 }
 
-customElements.define("nav-bar", NavBar);
+customElements.define('nav-bar', NavBar);

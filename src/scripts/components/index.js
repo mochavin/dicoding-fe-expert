@@ -1,3 +1,3 @@
-import './footer'
-import './navbar'
-import './restaurant-list'
+import './footer';
+import './navbar';
+import './restaurant-list';

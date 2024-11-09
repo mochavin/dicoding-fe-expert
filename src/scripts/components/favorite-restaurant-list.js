@@ -1,5 +1,5 @@
-import FavoriteRestaurantIdb from "../data/favorite-restaurant-idb";
-import CONFIG from "../globals/config";
+import FavoriteRestaurantIdb from '../data/favorite-restaurant-idb';
+import CONFIG from '../globals/config';
 
 class FavoriteRestaurantList extends HTMLElement {
   constructor() {
@@ -19,7 +19,7 @@ class FavoriteRestaurantList extends HTMLElement {
       this.isLoading = false;
       this.render();
     } catch (error) {
-      console.error("Error loading favorites:", error);
+      console.error('Error loading favorites:', error);
       this.renderError(error);
     }
   }
@@ -63,8 +63,8 @@ class FavoriteRestaurantList extends HTMLElement {
       <h2 class="favorite-list-title">Your Favorite Restaurants</h2>
       <div class="restaurant-list">
         ${this.restaurants
-          .map(
-            (restaurant) => `
+    .map(
+      (restaurant) => `
           <a href="#/detail/${restaurant.id}" 
              class="restaurant-card" 
              aria-label="${restaurant.name} restaurant in ${restaurant.city}">
@@ -80,12 +80,12 @@ class FavoriteRestaurantList extends HTMLElement {
             </div>
           </a>
         `
-          )
-          .join("")}
+    )
+    .join('')}
       </div>
     `;
   }
 }
 
-customElements.define("favorite-restaurant-list", FavoriteRestaurantList);
+customElements.define('favorite-restaurant-list', FavoriteRestaurantList);
 export default FavoriteRestaurantList;

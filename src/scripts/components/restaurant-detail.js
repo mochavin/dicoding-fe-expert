@@ -1,6 +1,6 @@
-import RestaurantApiSource from "../data/RestaurantApiSource";
-import CONFIG from "../globals/config";
-import FavoriteRestaurantIdb from "../data/favorite-restaurant-idb";
+import RestaurantApiSource from '../data/RestaurantApiSource';
+import CONFIG from '../globals/config';
+import FavoriteRestaurantIdb from '../data/favorite-restaurant-idb';
 
 class RestaurantDetail extends HTMLElement {
   constructor() {
@@ -22,15 +22,15 @@ class RestaurantDetail extends HTMLElement {
       await this.render();
       await this.initializeFavoriteButton();
     } catch (error) {
-      console.error("Error loading restaurant detail:", error);
+      console.error('Error loading restaurant detail:', error);
       this.renderError(error);
     }
   }
 
   async initializeFavoriteButton() {
-    const favoriteButton = this.querySelector("#favoriteButton");
+    const favoriteButton = this.querySelector('#favoriteButton');
     if (!favoriteButton) {
-      console.error("Failed to initialize favorite button");
+      console.error('Failed to initialize favorite button');
       return;
     }
 
@@ -41,7 +41,7 @@ class RestaurantDetail extends HTMLElement {
         this.renderLikeButton();
       }
 
-      favoriteButton.addEventListener("click", async (event) => {
+      favoriteButton.addEventListener('click', async (event) => {
         event.preventDefault();
         try {
           if (await this.isRestaurantFavorited(this.restaurant.id)) {
@@ -60,11 +60,11 @@ class RestaurantDetail extends HTMLElement {
             this.renderLikedButton();
           }
         } catch (error) {
-          console.error("Error updating favorite status:", error);
+          console.error('Error updating favorite status:', error);
         }
       });
     } catch (error) {
-      console.error("Error initializing favorite button:", error);
+      console.error('Error initializing favorite button:', error);
     }
   }
 
@@ -74,9 +74,9 @@ class RestaurantDetail extends HTMLElement {
   }
 
   renderLikeButton() {
-    const favoriteButton = this.querySelector("#favoriteButton");
+    const favoriteButton = this.querySelector('#favoriteButton');
     if (!favoriteButton) {
-      console.error("Favorite button not found");
+      console.error('Favorite button not found');
       return;
     }
     favoriteButton.innerHTML = `
@@ -86,9 +86,9 @@ class RestaurantDetail extends HTMLElement {
   }
 
   renderLikedButton() {
-    const favoriteButton = this.querySelector("#favoriteButton");
+    const favoriteButton = this.querySelector('#favoriteButton');
     if (!favoriteButton) {
-      console.error("Favorite button not found");
+      console.error('Favorite button not found');
       return;
     }
     favoriteButton.innerHTML = `
@@ -120,8 +120,8 @@ class RestaurantDetail extends HTMLElement {
       <div class="restaurant-detail">
         <div class="restaurant-hero">
           <img src="${CONFIG.IMAGE_URL}/${this.restaurant.pictureId}" alt="${
-      this.restaurant.name
-    }">
+  this.restaurant.name
+}">
           <div class="restaurant-info">
             <h1>${this.restaurant.name}</h1>
             <div class="restaurant-meta">
@@ -142,24 +142,24 @@ class RestaurantDetail extends HTMLElement {
             <h2>Foods</h2>
             <ul>
               ${this.restaurant.menus.foods
-                .map(
-                  (food) => `
+    .map(
+      (food) => `
                 <li>${food.name}</li>
               `
-                )
-                .join("")}
+    )
+    .join('')}
             </ul>
           </div>
           <div class="menu-section">
             <h2>Drinks</h2>
             <ul>
               ${this.restaurant.menus.drinks
-                .map(
-                  (drink) => `
+    .map(
+      (drink) => `
                 <li>${drink.name}</li>
               `
-                )
-                .join("")}
+    )
+    .join('')}
             </ul>
           </div>
         </div>
@@ -167,8 +167,8 @@ class RestaurantDetail extends HTMLElement {
         <div class="restaurant-reviews">
           <h2>Customer Reviews</h2>
           ${this.restaurant.customerReviews
-            .map(
-              (review) => `
+    .map(
+      (review) => `
             <div class="review-card">
               <div class="review-header">
                 <strong>${review.name}</strong>
@@ -177,8 +177,8 @@ class RestaurantDetail extends HTMLElement {
               <p>${review.review}</p>
             </div>
           `
-            )
-            .join("")}
+    )
+    .join('')}
         </div>
         <div class="favorite-container">
           <button id="favoriteButton" class="favorite-button">
@@ -191,5 +191,5 @@ class RestaurantDetail extends HTMLElement {
   }
 }
 
-customElements.define("restaurant-detail", RestaurantDetail);
+customElements.define('restaurant-detail', RestaurantDetail);
 export default RestaurantDetail;

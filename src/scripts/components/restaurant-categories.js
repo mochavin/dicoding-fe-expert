@@ -1,12 +1,12 @@
 class RestaurantCategories extends HTMLElement {
   connectedCallback() {
     this.categories = [
-      "All",
-      "Indonesian",
-      "Chinese",
-      "Japanese",
-      "Western",
-      "Middle Eastern"
+      'All',
+      'Indonesian',
+      'Chinese',
+      'Japanese',
+      'Western',
+      'Middle Eastern'
     ];
     this.render();
     this.addEventListeners();
@@ -15,7 +15,7 @@ class RestaurantCategories extends HTMLElement {
   render() {
     this.innerHTML = `
       <div class="categories">
-        ${this.categories.map(category => `
+        ${this.categories.map((category) => `
           <button 
             class="category-btn ${category === 'All' ? 'active' : ''}"
             data-category="${category}">
@@ -28,9 +28,9 @@ class RestaurantCategories extends HTMLElement {
 
   addEventListeners() {
     const buttons = this.querySelectorAll('.category-btn');
-    buttons.forEach(button => {
+    buttons.forEach((button) => {
       button.addEventListener('click', () => {
-        buttons.forEach(btn => btn.classList.remove('active'));
+        buttons.forEach((btn) => btn.classList.remove('active'));
         button.classList.add('active');
         this.dispatchEvent(new CustomEvent('categoryChange', {
           detail: button.dataset.category

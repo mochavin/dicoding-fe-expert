@@ -1,9 +1,9 @@
-import CONFIG from './config'
+import CONFIG from './config';
 
 const API_ENDPOINT = {
-  resturant_list: `${CONFIG.BASE_URL}/list`,
-  restaurant_detail: `${CONFIG.BASE_URL}/detail/`,
-  add_comment: `${CONFIG.BASE_URL}/review`,
-}
+  resturantList: `${CONFIG.BASE_URL}/list`,
+  restaurantDetail: `${CONFIG.BASE_URL}/detail/`,
+  addComment: `${CONFIG.BASE_URL}/review`,
+};
 
-export default API_ENDPOINT
+export default API_ENDPOINT;
