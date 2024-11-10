@@ -5,6 +5,35 @@ class App {
   constructor({ content }) {
     this._content = content;
     this._heroSection = document.querySelector('.hero');
+    this._skipLink = document.querySelector('.skip-link');
+    this._mainContent = document.querySelector('#main-section');
+  }
+
+  _updateSkipLink(url) {
+    const contentTargets = {
+      '/': '#main-section',
+      '/detail': '#detail-content',
+      '/favorite': '#favorite-content',
+    };
+
+    const target = contentTargets[url] || '#main-section';
+    this._skipLink.setAttribute('href', target);
+
+    this._skipLink.addEventListener('click', (e) => {
+      e.preventDefault();
+      const targetElement = document.querySelector(target);
+      if (targetElement) {
+        targetElement.tabIndex = -1;
+        targetElement.focus();
+        targetElement.addEventListener(
+          'blur',
+          () => {
+            targetElement.removeAttribute('tabIndex');
+          },
+          { once: true }
+        );
+      }
+    });
   }
 
   async renderPage() {
@@ -15,6 +44,8 @@ class App {
       if (!page) {
         throw new Error('Page not found');
       }
+
+      this._updateSkipLink(url);
 
       if (url.includes('detail')) {
         this._heroSection.style.display = 'none';
@@ -29,17 +60,10 @@ class App {
         const parsedUrl = Router.parseActiveUrlWithoutCombiner();
         if (typeof page.loadDetail === 'function') {
           await page.loadDetail(parsedUrl.id);
-        } else {
-          throw new Error('Detail page loading not implemented');
         }
       }
     } catch (error) {
-      console.error('Error rendering page:', error);
-      this._content.innerHTML = `
-        <div class="error-container">
-          <p>Failed to load page: ${error.message}</p>
-        </div>
-      `;
+      console.error(error);
     }
   }
 }
