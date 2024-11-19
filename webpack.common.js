@@ -4,6 +4,7 @@ const CopyWebpackPlugin = require("copy-webpack-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const { InjectManifest } = require("workbox-webpack-plugin");
 const { BundleAnalyzerPlugin } = require("webpack-bundle-analyzer");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = {
   entry: {
@@ -42,6 +43,7 @@ module.exports = {
       {
         test: /\.s[ac]ss$/i,
         use: [
+          MiniCssExtractPlugin.loader,
           // Creates `style` nodes from JS strings
           "style-loader",
           // Translates CSS into CommonJS
@@ -53,6 +55,7 @@ module.exports = {
       {
         test: /\.css$/,
         use: [
+          MiniCssExtractPlugin.loader,
           {
             loader: "style-loader",
           },
@@ -65,6 +68,10 @@ module.exports = {
   },
   plugins: [
     new CleanWebpackPlugin(),
+
+    new MiniCssExtractPlugin({
+      filename: '[name].[contenthash].css',
+    }),
 
     new HtmlWebpackPlugin({
       filename: "index.html",
