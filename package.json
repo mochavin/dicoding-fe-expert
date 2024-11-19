@@ -9,7 +9,9 @@
     "serve": "http-server dist",
     "test": "jest",
     "test:watch": "jest --watchAll",
-    "e2e": "codeceptjs run --steps"
+    "e2e": "codeceptjs run --steps",
+    "deploy": "gh-pages -d dist",
+    "predeploy": "npm run build"
   },
   "keywords": [],
   "author": "your_name <your.email@domain.com>",
@@ -29,6 +31,7 @@
     "eslint": "^9.14.0",
     "eslint-config-dicodingacademy": "^0.9.4",
     "fake-indexeddb": "^4.0.2",
+    "gh-pages": "^6.2.0",
     "html-webpack-plugin": "^5.5.3",
     "http-server": "^14.1.1",
     "jest": "^29.6.1",
