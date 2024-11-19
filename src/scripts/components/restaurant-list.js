@@ -1,5 +1,5 @@
-import RestaurantApiSource from "../data/RestaurantApiSource";
-import CONFIG from "../globals/config";
+import RestaurantApiSource from '../data/RestaurantApiSource';
+import CONFIG from '../globals/config';
 
 class RestaurantList extends HTMLElement {
   constructor() {
@@ -20,7 +20,7 @@ class RestaurantList extends HTMLElement {
       this.isLoading = false;
       this.render();
     } catch (error) {
-      console.error("Error loading restaurants:", error);
+      console.error('Error loading restaurants:', error);
       this.renderError(error);
     }
   }
@@ -49,8 +49,8 @@ class RestaurantList extends HTMLElement {
       <h2 class="restaurant-list-title">Explore Restaurants</h2>
       <div class="restaurant-list">
         ${this.restaurants
-          .map(
-            (restaurant) => `
+    .map(
+      (restaurant) => `
           <a href="#/detail/${restaurant.id}" 
              class="restaurant-card" 
              tabindex="0" 
@@ -69,12 +69,12 @@ class RestaurantList extends HTMLElement {
             </div>
           </a>
         `
-          )
-          .join("")}
+    )
+    .join('')}
       </div>
     `;
   }
 }
 
-customElements.define("restaurant-list", RestaurantList);
+customElements.define('restaurant-list', RestaurantList);
 export default RestaurantList;

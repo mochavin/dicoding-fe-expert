@@ -1,12 +1,12 @@
-import { openDB } from "idb";
+import { openDB } from 'idb';
 
-const DATABASE_NAME = "restaurant-catalogue";
+const DATABASE_NAME = 'restaurant-catalogue';
 const DATABASE_VERSION = 1;
-const OBJECT_STORE_NAME = "restaurants";
+const OBJECT_STORE_NAME = 'restaurants';
 
 const dbPromise = openDB(DATABASE_NAME, DATABASE_VERSION, {
   upgrade(database) {
-    database.createObjectStore(OBJECT_STORE_NAME, { keyPath: "id" });
+    database.createObjectStore(OBJECT_STORE_NAME, { keyPath: 'id' });
   },
 });
 
@@ -20,7 +20,7 @@ const FavoriteRestaurantIdb = {
   },
   async putRestaurant(restaurant) {
     if (!restaurant.id) {
-      throw new Error("Restaurant ID is required");
+      throw new Error('Restaurant ID is required');
     }
     return (await dbPromise).put(OBJECT_STORE_NAME, restaurant);
   },
