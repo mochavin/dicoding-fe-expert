@@ -1,39 +1,39 @@
-import API_ENDPOINT from '../globals/api-endpoint';
+import axios from "axios";
+import API_ENDPOINT from "../globals/api-endpoint";
 
 class RestaurantApiSource {
   static async getAllRestaurants() {
     try {
-      const response = await fetch(API_ENDPOINT.resturantList);
-      const responseJson = await response.json();
-      return responseJson.restaurants;
+      const response = await axios.get(API_ENDPOINT.resturantList);
+      return response.data.restaurants;
     } catch (error) {
-      throw new Error('Error while fetching restaurants');
+      throw new Error("Error while fetching restaurants");
     }
   }
 
   static async getRestaurantDetail(id) {
     try {
-      const response = await fetch(API_ENDPOINT.restaurantDetail + id);
-      const responseJson = await response.json();
-      return responseJson.restaurant;
+      const response = await axios.get(API_ENDPOINT.restaurantDetail + id);
+      return response.data.restaurant;
     } catch (error) {
-      throw new Error('Error while fetching restaurant detail');
+      throw new Error("Error while fetching restaurant detail");
     }
   }
 
   static async addReview(review) {
     try {
-      const response = await fetch(API_ENDPOINT.addComment, {
-        method: 'POST',
+      if (review.review.length > 1000) {
+        throw new Error("Review text is too long");
+      }
+      const response = await axios.post(API_ENDPOINT.addComment, review, {
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
-        body: JSON.stringify(review)
       });
-      const responseJson = await response.json();
-      return responseJson;
+      return response.data;
     } catch (error) {
-      throw new Error('Error while adding review');
+      console.error("Error while adding review:", error);
+      throw new Error("Error while adding review");
     }
   }
 }
